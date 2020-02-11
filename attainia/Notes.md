@@ -1,1 +1,1 @@
-I wasn't sure if you wanted the rest api to serve the json from a file or to save it in the database.
+I wasn't sure if you wanted the rest api to serve the json from a file or to save it in the database so I did both.
