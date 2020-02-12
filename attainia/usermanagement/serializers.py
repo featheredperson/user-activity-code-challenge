@@ -16,14 +16,4 @@ class UserSerializer(serializers.Serializer):
     login_count = serializers.IntegerField(min_value=0)
     project_count = serializers.IntegerField(min_value=0)
 
-    stream = io.BytesIO(json)
-    data = JSONParser().parse(stream)
-
-    serializer = UserSerializer(data=data)
-    serializer.is_valid()
-    # True
-    serializer.validated_data
-    json = JSONRenderer().render(serializer.data)
-    json
-
 
