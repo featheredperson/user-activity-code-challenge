@@ -19,10 +19,11 @@ from django.urls import path, include
 
 from rest_framework import routers
 
-from usermanagement.views import UserActivityViewSet
+from usermanagement.views import UserActivityViewSet, UserActivityModelViewSet
 
 router = routers.DefaultRouter()
 router.register(r'users', UserActivityViewSet)
+router.register(r'activeusers', UserActivityModelViewSet)
 
 
 urlpatterns = [

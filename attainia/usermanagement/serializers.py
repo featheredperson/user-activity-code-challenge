@@ -2,10 +2,7 @@
 Creating a regular serializer for working with json from the datafile, and
 a model serializer for working with it from the database
 '''
-import io
 from rest_framework import serializers
-from rest_framework.parsers import JSONParser
-from rest_framework.renderers import JSONRenderer
 
 
 class UserSerializer(serializers.Serializer):
