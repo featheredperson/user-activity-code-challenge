@@ -6,6 +6,7 @@ class UserActivity(AbstractUser):
     class Meta:
         ordering = ['-last_login']
         verbose_name_plural = "users"
+        # app_label = 'usermanagement'
 
     last_login = models.DateTimeField()
     login_count = models.IntegerField()
@@ -13,5 +14,3 @@ class UserActivity(AbstractUser):
 
     def __str__(self):
         return self.username + " " + str(self.last_login)
-
-    # def get_absolute_url(self):

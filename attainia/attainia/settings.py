@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
-import os
+import os, sys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_nose',
     'rest_framework',
     'usermanagement',
 ]
@@ -54,6 +55,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'attainia.urls'
+
+if 'test' in sys.argv:
+    ROOT_URLCONF = 'attainia.attainia.urls'
 
 TEMPLATES = [
     {
@@ -76,6 +80,19 @@ WSGI_APPLICATION = 'attainia.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
+if 'test' in sys.argv:
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': ':memory:',
+            'HOST': '',
+            'PORT': '',
+            'USER': '',
+            'PASSWORD': '',
+        }
+    }
+
 
 DATABASES = {
     'default': {
@@ -129,8 +146,17 @@ REST_FRAMEWORK = {
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json',
+    # don't need these yet but good to set up for the future
+    'TEST_REQUEST_RENDERER_CLASSES': [
+        'rest_framework.renderers.MultiPartRenderer',
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.TemplateHTMLRenderer'
     ]
 }
 
 
 AUTH_USER_MODEL = 'usermanagement.UserActivity'
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
